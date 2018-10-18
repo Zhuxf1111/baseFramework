@@ -1,6 +1,7 @@
 package com.base.app.network.frame
 
 import com.base.app.androidapplication.BuildConfig
+import com.base.app.network.CustomConvertFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -49,7 +50,7 @@ class RetrofitHelper {
     private fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(CustomConvertFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BuildConfig.API_URL)
                 .build()
@@ -61,7 +62,6 @@ class RetrofitHelper {
             //TODO 添加token等内容
             return chain.proceed(request.build())
         }
-
     }
 
 
